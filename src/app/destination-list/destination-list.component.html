@@ -1,0 +1,29 @@
+<div>
+    <div class="container content">
+        <div class="row">
+            <div class="bg-light">
+                <h1 class="text-center">
+                    Wish List
+                </h1>
+            </div>
+            <div class="form-group">
+                <label>Destination</label>
+                <input type="text" class="form-control" id="name" placeholder="Name..." #name>
+            </div>
+            <br><br><br>
+            <div class="form-group">
+                <label>Image</label>
+                <input type="url" class="form-control" id="img" placeholder="Url..." #url>
+            </div>
+            <br><br><br>
+            <button type="submit" class="btn btn-primary" (click)="save(name.value, url.value)">Save</button>  
+        </div>
+
+
+    </div>
+    <br><br>
+    <div class="row row-flex">
+        <app-destino-viajes *ngFor="let d of destination" [destinations]="d"></app-destino-viajes>
+    </div>
+    
+</div>
