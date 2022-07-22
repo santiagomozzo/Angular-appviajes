@@ -1,0 +1,25 @@
+<form
+    [formGroup]="fg">
+    (ngSubmit)="save(fg.controls['name'].value, fg.contorls['url'].value)"
+    <div class="form-group">
+        <label>Destination</label>
+        <input type="text" class="form-control" id="name" placeholder="Name..." 
+        formControlName="fg.controls['name']">
+        <ul>
+            <li *ngFor="let r of searchResult;">{{r}}</li>
+        </ul>
+        <div *ngIf="fg.controls['name'].hasError('invalidName')">invalid name!</div>
+        <div *ngIf="fg.controls['name'].hasError('required')">required name!</div>
+        <div *ngIf="fg.controls['name'].hasError('minLengthName')">name must be at least {{minLength}} long!</div> 
+    </div>
+    <br><br><br>
+    <div class="form-group">
+        <label>Image</label>
+        <input type="url" class="form-control" id="img" placeholder="Url..." 
+        formControlName="fg.controls['url']">
+    </div>
+    <br><br><br>
+    <button type="submit" class="btn btn-primary" *ngIf="fg.valid">Save</button>
+
+</form>
+

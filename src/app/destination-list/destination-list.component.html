@@ -6,24 +6,31 @@
                     Wish List
                 </h1>
             </div>
-            <div class="form-group">
-                <label>Destination</label>
-                <input type="text" class="form-control" id="name" placeholder="Name..." #name>
-            </div>
-            <br><br><br>
-            <div class="form-group">
-                <label>Image</label>
-                <input type="url" class="form-control" id="img" placeholder="Url..." #url>
-            </div>
-            <br><br><br>
-            <button type="submit" class="btn btn-primary" (click)="save(name.value, url.value)">Save</button>  
+            <app-forms-destination-travel (onItemAdded)="add($event)"></app-forms-destination-travel>  
         </div>
 
 
     </div>
-    <br><br>
+    
+    <hr class="mb-5">
+
     <div class="row row-flex">
-        <app-destino-viajes *ngFor="let d of destination" [destinations]="d"></app-destino-viajes>
+        <app-destino-viajes 
+           *ngFor="let d of all; let i=index" 
+           [destinations]="d"
+           (clicked)="selected($event)"
+           [position]="i + 1"
+           >
+        </app-destino-viajes>
+    </div>
+
+    <hr class="mb-5">
+
+    <div class="row row-flex">
+        <h5>Activity</h5>
+        <ul>
+            <li *ngFor="let u of updates;">{{u}}</li>
+        </ul>
     </div>
     
 </div>
