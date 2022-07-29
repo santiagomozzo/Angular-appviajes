@@ -4,6 +4,7 @@ import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
 import { DestinationTravel } from "./destination-travel.model";
+import { HttpClientModule } from "@angular/common/http";
 
 
 //Estado
@@ -13,12 +14,12 @@ export interface DestinationTravelState{
     favorito: DestinationTravel;
 }
 
-export const initializeDestinationTravelState = function() {
+export function initializeDestinationTravelState () {
     return {
         items: [],
         loading: false,
         favorito: null
-    }
+    };
 }
 
 //Acciones
@@ -26,7 +27,8 @@ export enum DestinationTravelActionTypes {
     NEW_DESTINATION = '[Destination Travel] New',
     CHOOSE_FAVORITE = '[Destination Travel] Favorite',
     VOTE_UP = '[Destination Travel] Vote Up',
-    VOTE_DOWN = '[Destination Travel] Vote Down'
+    VOTE_DOWN = '[Destination Travel] Vote Down',
+    INIT_MY_DATA = '[Destination Travel] Init My Data'
 }
 
 export class NewDestinationAction implements Action {
@@ -49,6 +51,11 @@ export class VoteDownAction implements Action {
     constructor(public destination: DestinationTravel) {}
 }
 
+export class InitMyDataAction implements Action {
+    type = DestinationTravelActionTypes.INIT_MY_DATA;
+    constructor(public destination: string[]) {}
+}
+
 export type DestinationTravelActions = NewDestinationAction | ChooseFavoriteAction 
 | VoteUpAction | VoteDownAction;
 
@@ -58,6 +65,13 @@ export function reducerDestinationTravel(
     action:DestinationTravelActions,
  ) : DestinationTravelState {
     switch (action.type) {
+        case DestinationTravelActionTypes.INIT_MY_DATA: {
+            const destination: string[] = (action as InitMyDataAction).destination;
+            return {
+                ...state,
+                items: destination.map((d) => new DestinationTravel(d, ''))
+            }
+        }
         case DestinationTravelActionTypes.NEW_DESTINATION: {
             return {
                 ...state,

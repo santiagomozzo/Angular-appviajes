@@ -1,14 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.module';
-import { ChooseFavoriteAction, NewDestinationAction } from '../models/destination-travel-state.model';
-import { DestinationTravel } from '../models/destination-travel.model';
-import { DestinationApiClient } from './../models/destination-api-client.model';
+import { AppState } from './../../app.module';
+import { ChooseFavoriteAction, NewDestinationAction } from '../../models/destination-travel-state.model';
+import { DestinationTravel } from '../../models/destination-travel.model';
+import { DestinationApiClient } from './../../models/destination-api-client.model';
 
 @Component({
   selector: 'app-destination-list',
   templateUrl: './destination-list.component.html',
-  styleUrls: ['./destination-list.component.css']
+  styleUrls: ['./destination-list.component.css'],
+  providers: [DestinationApiClient]
 })
 export class DestinationListComponent implements OnInit {
   @Output() onItemAdded: EventEmitter<DestinationTravel>

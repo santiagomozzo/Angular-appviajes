@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { DestinationApiClient } from '../models/destination-api-client.model';
-import { DestinationTravel } from '../models/destination-travel.model';
+import { DestinationApiClient } from '../../models/destination-api-client.model';
+import { DestinationTravel } from '../../models/destination-travel.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-details-destination',
   templateUrl: './details-destination.component.html',
-  styleUrls: ['./details-destination.component.css']
+  styleUrls: ['./details-destination.component.css'],
+  providers: [DestinationApiClient]
+
 })
 export class DetailsDestinationComponent implements OnInit {
   destination: DestinationTravel;
@@ -14,9 +16,8 @@ export class DetailsDestinationComponent implements OnInit {
   constructor(private route: ActivatedRoute, private destinationApiClient: DestinationApiClient) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this. destination = null;
-    //this.destinationApiClient.getById(id);
+    let id = this.route.snapshot.paramMap.get('id');
+    this.destinationApiClient.getById(id);
   }
 
 }
