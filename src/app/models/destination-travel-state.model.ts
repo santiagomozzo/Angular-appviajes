@@ -66,7 +66,7 @@ export function reducerDestinationTravel(
  ) : DestinationTravelState {
     switch (action.type) {
         case DestinationTravelActionTypes.INIT_MY_DATA: {
-            const destination: string[] = (action as InitMyDataAction).destination;
+            const destination: string[] = (action as unknown as InitMyDataAction).destination;
             return {
                 ...state,
                 items: destination.map((d) => new DestinationTravel(d, ''))

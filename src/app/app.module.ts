@@ -7,6 +7,8 @@ import { EffectsModule} from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClient, HttpClientModule, HttpHeaders, HttpRequest } from '@angular/common/http' 
 import Dexie from 'dexie'; 
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { DestinoViajesComponent } from './components/destino-viajes/destino-viajes.component';
@@ -25,6 +27,8 @@ import { VuelosMasInfoComponentComponent } from './components/vuelos/vuelos-mas-
 import { VuelosDetalleComponentComponent } from './components/vuelos/vuelos-detalle-component/vuelos-detalle-component.component';
 import { ReservasModule } from './reservas/reservas.module';
 import { DestinationTravel } from './models/destination-travel.model';
+import { EspiameDirective } from './espiame.directive';
+import { TrackearClickDirective } from './trackear-click.directive';
 
 //app config
 export interface AppConfig {
@@ -113,7 +117,9 @@ export const db = new MyDatabase();
     VuelosComponentComponent,
     VuelosMainComponentComponent,
     VuelosMasInfoComponentComponent,
-    VuelosDetalleComponentComponent
+    VuelosDetalleComponentComponent,
+    EspiameDirective,
+    TrackearClickDirective
     
   ],
   imports: [
@@ -125,7 +131,9 @@ export const db = new MyDatabase();
     EffectsModule.forRoot([DestinationTravelEffects]),
     StoreDevtoolsModule.instrument(),
     ReservasModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMapboxGLModule,
+    BrowserAnimationsModule 
   ],
   providers: [
     AuthService,
